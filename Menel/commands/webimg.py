@@ -10,7 +10,7 @@ def setup(cliffs):
     @cliffs.command('webimg [scrolling|fullpage]:fullpage <url...>', name='webimg', cooldown=10)
     async def command(m, url, fullpage=None):
         async with m.channel.typing():
-            browser = await launch(ignoreHTTPSErrors=True, headless=False)
+            browser = await launch(ignoreHTTPSErrors=True, headless=True)
             page = await browser.newPage()
             await page.setViewport({'width': 2048, 'height': 1024, 'deviceScaleFactor': 2})
 
