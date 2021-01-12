@@ -1,0 +1,5 @@
+git+https://github.com/Rapptz/discord.py
+git+https://github.com/michalwa/py-cliffs
+git+https://github.com/mongodb/motor
+git+https://github.com/rthalley/dnspython
+git+https://github.com/theskumar/python-dotenv
