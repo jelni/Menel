@@ -6,7 +6,7 @@
 
 ### About
 
-This is a Python Discord Bot refactoring.
+My Python [Discord Bot](https://jelnislaw.ml/menelbot/) rewrite
 
 ### Contributors
 
