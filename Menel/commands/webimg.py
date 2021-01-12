@@ -3,14 +3,16 @@ from io import BytesIO
 
 from discord import File
 from pyppeteer import launch
-from pyppeteer.errors import NetworkError, TimeoutError
+from pyppeteer.errors import NetworkError, PageError, TimeoutError
+
+from objects.bot import bot
 
 
 def setup(cliffs):
     @cliffs.command('webimg [scrolling|fullpage]:fullpage <url...>', name='webimg', cooldown=10)
     async def command(m, url, fullpage=None):
         async with m.channel.typing():
-            browser = await launch(ignoreHTTPSErrors=True, headless=True)
+            browser = await launch(ignoreHTTPSErrors=True, headless=True, loop=bot.loop, args=['--no-sandbox'])
             page = await browser.newPage()
             await page.setViewport({'width': 2048, 'height': 1024, 'deviceScaleFactor': 2})
 
@@ -18,7 +20,7 @@ def setup(cliffs):
                 await page.goto(url, timeout=60000)
             except TimeoutError:
                 await m.error('Minął czas na wczytanie strony.')
-            except NetworkError:
+            except (PageError, NetworkError):
                 await m.error('Nie udało się wczytać strony. Sprawdź czy podany adres jest poprawny.')
             else:
                 await sleep(2)
