@@ -2,6 +2,8 @@ from collections import defaultdict
 from datetime import datetime, timedelta
 from typing import Optional
 
+from objects.bot import bot
+
 
 class Cooldowns:
     def __init__(self):
@@ -10,6 +12,9 @@ class Cooldowns:
 
     def get(self, user_id: int, command: str) -> Optional[float]:
         if user_id not in self.cooldowns or command not in self.cooldowns[user_id]:
+            return None
+
+        if user_id == bot.OWNER:
             return None
 
         if self.cooldowns[user_id][command] <= datetime.utcnow().timestamp():
