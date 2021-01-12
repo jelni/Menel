@@ -16,4 +16,7 @@ class Message(discord.Message):
         except discord.Forbidden:
             pass
         except discord.HTTPException as e:
-            return await self.channel.send(str(e))
+            try:
+                return await self.channel.send(str(e))
+            except discord.HTTPException:
+                pass

@@ -2,7 +2,7 @@ import discord
 
 
 def setup(cliffs):
-    @cliffs.command('ping', name='ping')
+    @cliffs.command('ping', name='ping', cooldown=2)
     async def command(m):
         message = await m.send('Pong!')
 
