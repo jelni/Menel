@@ -15,6 +15,6 @@ def setup(cliffs):
                 timeout=aiohttp.ClientTimeout(total=10)
         ) as r:
             if r.status == 200:
-                await m.send('good')
+                await m.success('good')
             else:
-                await m.send(clean_content((await r.json())['message']))
+                await m.error(clean_content((await r.json())['message']))
