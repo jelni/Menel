@@ -1,7 +1,17 @@
+from math import ceil
+
 from cliffs import MismatchedLiteralSuggestion, MismatchedParameterType
 from discord import Colour, Embed
 
 from functions.clean_content import clean_content
+from functions.plural_time import plural_time
+
+
+def cooldown(time: float) -> Embed:
+    return Embed(
+        description=f'Poczekaj jeszcze {plural_time(ceil(time))} przed ponownym użyciem komendy.',
+        colour=Colour.red()
+    )
 
 
 def mismatched_parameter_type(e: MismatchedParameterType) -> Embed:

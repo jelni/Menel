@@ -7,17 +7,18 @@ from cliffs import (
 )
 
 from command_dispatcher import dispatch_errors
+from objects.cooldowns import cooldowns
 from objects.message import Message
 
 
 async def dispatch(cliffs: CommandDispatcher, m: Message, prefix: str):
     try:
-        result, kwargs = cliffs.dispatch(m.content[len(prefix):], m=m, prefix=prefix)
+        result, command = cliffs.dispatch(m.content[len(prefix):], m=m, prefix=prefix)
     except MismatchedLiteralSuggestion as e:
-        await m.send(dispatch_errors.mismatched_literal_suggestion(e))
+        await m.send(embed=dispatch_errors.mismatched_literal_suggestion(e))
 
     except MismatchedParameterType as e:
-        await m.send(dispatch_errors.mismatched_parameter_type(e))
+        await m.send(embed=dispatch_errors.mismatched_parameter_type(e))
 
     except CallMatchFail as fail:
         ...
@@ -30,4 +31,8 @@ async def dispatch(cliffs: CommandDispatcher, m: Message, prefix: str):
         if not result:
             return
 
-        await result
+        if not (cooldown := cooldowns.auto(m.author.id, command.kwargs['name'], command.kwargs['cooldown'])):
+            await result
+        else:
+            if not cooldowns.auto(m.author.id, '_cooldown', 2):
+                await m.send(embed=dispatch_errors.cooldown(cooldown))
