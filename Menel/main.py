@@ -1,3 +1,5 @@
+from dotenv import load_dotenv
+
 import os
 
 from dotenv import load_dotenv
@@ -9,6 +11,8 @@ from setup.setup_cliffs import setup_cliffs
 
 
 load_dotenv()
+
+os.chdir(os.path.join(os.getcwd(), 'Menel'))
 
 cliffs = setup_cliffs()
 import_commands(cliffs)
