@@ -17,6 +17,24 @@ class Message(discord.Message):
             pass
         except discord.HTTPException as e:
             try:
-                return await self.channel.send(str(e))
+                return await self.channel.send(embed=discord.Embed(description=str(e), colour=discord.Colour.red()))
             except discord.HTTPException:
                 pass
+
+
+    async def _send_embed(self, description: str, color: discord.Colour) -> discord.Message:
+        embed = discord.Embed(description=description, colour=color)
+        embed.set_author(name=str(self.author), icon_url=str(self.author.avatar_url_as(size=256)))
+        return await self.send(embed=embed)
+
+
+    async def respond(self, text: str) -> discord.Message:
+        return await self._send_embed(text, color=discord.Colour.blue())
+
+
+    async def success(self, text: str) -> discord.Message:
+        return await self._send_embed(text, color=discord.Colour.green())
+
+
+    async def error(self, text: str) -> discord.Message:
+        return await self._send_embed(text, color=discord.Colour.red())
