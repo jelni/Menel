@@ -1,3 +1,5 @@
+from typing import Optional
+
 import discord
 
 
@@ -22,10 +24,11 @@ class Message(discord.Message):
                 pass
 
 
-    async def _send_embed(self, description: str, color: discord.Colour) -> discord.Message:
-        embed = discord.Embed(description=description, colour=color)
+    async def _send_embed(self, desc: str, color: discord.Colour,
+            delete_after: Optional[int] = None) -> discord.Message:
+        embed = discord.Embed(description=desc, colour=color)
         embed.set_author(name=str(self.author), icon_url=str(self.author.avatar_url_as(size=256)))
-        return await self.send(embed=embed)
+        return await self.send(embed=embed, delete_after=delete_after)
 
 
     async def respond(self, text: str) -> discord.Message:
@@ -36,5 +39,5 @@ class Message(discord.Message):
         return await self._send_embed(text, color=discord.Colour.green())
 
 
-    async def error(self, text: str) -> discord.Message:
-        return await self._send_embed(text, color=discord.Colour.red())
+    async def error(self, text: str, delete_after: Optional[int] = None) -> discord.Message:
+        return await self._send_embed(text, color=discord.Colour.red(), delete_after=delete_after)

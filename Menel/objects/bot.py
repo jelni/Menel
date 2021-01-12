@@ -6,11 +6,7 @@ class Menel(AutoShardedClient):
     def __init__(self, **kwargs):
         super().__init__(**kwargs)
 
-        self.ready = False
-
-        self.config = dict()
-        self.db = None
-        self.word_lists = None
+        self.OWNER = 305765073689903104
 
         self.cooldowns = {}
 

@@ -1,3 +1,5 @@
+from asyncio import Task
+
 from cliffs import (
     CallMatchFail,
     CommandDispatcher,
@@ -34,5 +36,6 @@ async def dispatch(cliffs: CommandDispatcher, m: Message, prefix: str):
         if not (cooldown := cooldowns.auto(m.author.id, command.kwargs['name'], command.kwargs['cooldown'])):
             await result
         else:
+            Task(result).cancel()
             if not cooldowns.auto(m.author.id, '_cooldown', 2):
-                await m.error(dispatch_errors.cooldown(cooldown))
+                await m.error(dispatch_errors.cooldown(cooldown), delete_after=5)
