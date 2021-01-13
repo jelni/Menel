@@ -3,6 +3,7 @@ import re
 import discord
 from cliffs import CommandDispatcher
 
+import regexes
 from command_dispatcher.dispatch import dispatch
 from objects.bot import Menel
 from objects.cooldowns import cooldowns
@@ -21,12 +22,12 @@ def setup(bot: Menel, cliffs: CommandDispatcher):
 
         prefix = '.'
 
-        if re.fullmatch(f'^<@!?{bot.user.id}>$', m.content, re.IGNORECASE):
+        if re.fullmatch(regexes.mention(bot.user.id), m.content):
             if not cooldowns.auto(m.author.id, '_mention', 3):
                 await m.channel.send('Cześć')
-            return
 
-        if not m.content.lower().startswith(prefix):
-            return
+        elif m.content.lower().startswith(prefix):
+            await dispatch(cliffs, m, prefix)
 
-        await dispatch(cliffs, m, prefix)
+        elif match := re.match(regexes.mention(bot.user.id), m.content):
+            await dispatch(cliffs, m, match.group())
