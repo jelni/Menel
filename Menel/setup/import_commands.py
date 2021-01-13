@@ -11,7 +11,7 @@ def import_commands(cliffs: CommandDispatcher):
 
     for root, _, files in os.walk('commands'):
         for file in files:
-            if not file.endswith('.py') or file.startswith('.'):
+            if not file.endswith('.py') or file.startswith('_'):
                 continue
 
             module = import_module(re.sub(r'[/\\]', '.', os.path.join(root, file).removesuffix('.py')))
