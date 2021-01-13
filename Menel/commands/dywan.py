@@ -3,7 +3,7 @@ from random import choice
 
 def setup(cliffs):
     @cliffs.command('dywan [<width: int>] [<length: int>]', name='dywan', cooldown=3)
-    async def command_dywan(m, width=15, length=10):
+    async def command(m, width=15, length=10):
         if width <= 0 or length <= 0:
             await m.error('Taki dywan byłby za mały, kasztanie')
             return
