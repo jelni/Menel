@@ -24,7 +24,7 @@ bot = Menel(
         voice_states=False,
         presences=False,
         messages=True,
-        reactions=False,
+        reactions=True,
         typing=False
     ),
     member_cache_flags=discord.MemberCacheFlags(online=False, voice=False, joined=True),
