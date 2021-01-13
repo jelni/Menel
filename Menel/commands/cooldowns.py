@@ -5,11 +5,12 @@ from discord import Colour, Embed
 
 from functions.plural_time import plural_time
 from objects.cooldowns import cooldowns
+from objects.message import Message
 
 
 def setup(cliffs):
     @cliffs.command('cooldowns', name='cooldowns', cooldown=2)
-    async def command(m):
+    async def command(m: Message):
         if not cooldowns.cooldowns[m.author.id]:
             await m.send('Nie masz żadnych spowolnień.')
             return

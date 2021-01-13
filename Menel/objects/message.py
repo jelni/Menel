@@ -31,8 +31,8 @@ class Message(discord.Message):
         return await self.send(embed=embed, delete_after=delete_after)
 
 
-    async def respond(self, text: str) -> discord.Message:
-        return await self._send_embed(text, color=discord.Colour.blue())
+    async def info(self, text: str) -> discord.Message:
+        return await self._send_embed(text, color=discord.Colour.blurple())
 
 
     async def success(self, text: str) -> discord.Message:

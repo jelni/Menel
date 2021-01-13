@@ -1,4 +1,5 @@
 from asyncio import Task
+from traceback import print_exc
 
 from cliffs import (
     CallMatchFail,
@@ -9,6 +10,7 @@ from cliffs import (
 )
 
 from command_dispatcher import dispatch_errors
+from functions.clean_content import clean_content
 from objects.cooldowns import cooldowns
 from objects.message import Message
 
@@ -34,7 +36,11 @@ async def dispatch(cliffs: CommandDispatcher, m: Message, prefix: str):
             return
 
         if not (cooldown := cooldowns.auto(m.author.id, command.kwargs['name'], command.kwargs['cooldown'])):
-            await result
+            try:
+                await result
+            except Exception as e:
+                print_exc()
+                await m.error(f'An error occurred\n{clean_content(e)}')
         else:
             Task(result).cancel()
             if not cooldowns.auto(m.author.id, '_cooldown', 2):
