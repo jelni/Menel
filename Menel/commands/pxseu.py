@@ -10,8 +10,8 @@ def setup(cliffs):
     async def command(m, message):
         async with aiohttp.request(
                 'POST', 'https://www.pxseu.com/api/v2/sendMessage',
-                json={'message': message},
-                headers={'Authorization': getenv('PXSEU_MESSAGE_TOKEN')},
+                json={'message': message, 'user': m.author.id},
+                headers={'Authorization': 'Bearer ' + getenv('PXSEU_MESSAGE_TOKEN')},
                 timeout=aiohttp.ClientTimeout(total=10)
         ) as r:
             if r.status == 200:
