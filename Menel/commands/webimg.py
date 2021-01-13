@@ -6,11 +6,12 @@ from pyppeteer import launch
 from pyppeteer.errors import NetworkError, PageError, TimeoutError
 
 from objects.bot import bot
+from objects.message import Message
 
 
 def setup(cliffs):
     @cliffs.command('webimg [scrolling|fullpage]:fullpage <url...>', name='webimg', cooldown=10)
-    async def command(m, url, fullpage=None):
+    async def command(m: Message, url, fullpage=None):
         async with m.channel.typing():
             browser = await launch(ignoreHTTPSErrors=True, headless=True, loop=bot.loop, args=['--no-sandbox'])
             page = await browser.newPage()
