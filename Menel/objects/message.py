@@ -2,10 +2,13 @@ from typing import Optional
 
 import discord
 
+from objects.bot import bot
+
 
 class Message(discord.Message):
     def __init__(self, message: discord.Message):
         self.message = message
+        self.bot = bot
 
 
     def __getattr__(self, item):

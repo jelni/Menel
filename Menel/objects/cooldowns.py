@@ -23,8 +23,9 @@ class Cooldowns:
             return self.cooldowns[user_id][command] - datetime.utcnow().timestamp()
 
 
-    def set(self, user_id: int, command: str, time: int) -> None:
-        self.cooldowns[user_id][command] = (datetime.utcnow() + timedelta(seconds=time)).timestamp()
+    def set(self, user_id: int, command: str, time: Optional[int]) -> None:
+        if time:
+            self.cooldowns[user_id][command] = (datetime.utcnow() + timedelta(seconds=time)).timestamp()
 
 
     def auto(self, user_id: int, command: str, time: int) -> Optional[float]:

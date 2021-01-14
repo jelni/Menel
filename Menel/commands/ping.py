@@ -11,6 +11,6 @@ def setup(cliffs):
         delay = round((message.created_at.timestamp() - m.created_at.timestamp()) * 1000)
 
         try:
-            await message.edit(content=f'Ping: {delay}ms')
+            await message.edit(content=f'Ping: {delay} ms')
         except discord.HTTPException:
             pass
