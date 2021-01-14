@@ -18,7 +18,7 @@ def setup(cliffs):
                     await m.error(
                         {
                             'not found': 'Ten serwer nie został dodany na DList.top.'
-                        }.get(this_guild.get('error'), this_guild.get('error', 'DList.top nie zwróciła treści błędu'))
+                        }.get(this_guild.get('error'), this_guild.get('error', 'DList.top nie zwróciła treści błędu.'))
                     )
                     return
 

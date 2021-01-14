@@ -10,6 +10,17 @@ def cooldown(time: float) -> str:
     return f'Poczekaj jeszcze {plural_time(ceil(time))} przed ponownym użyciem komendy.'
 
 
+def missing_perms(level: int) -> str:
+    if level == 2:
+        return 'Ta komenda wymaga uprawnień do zarządzania serwerem.'
+    elif level == 3:
+        return 'Ta komenda wymaga bycia administratorem serwera.'
+    elif level == 4:
+        return 'Ta komenda wymaga bycia właścicielem serwera.'
+    elif level == 5:
+        return 'Ta komenda wymaga bycia właścicielem bota.'
+
+
 def mismatched_parameter_type(e: MismatchedParameterType) -> str:
     return f'Wartość `{clean_content(e.actual.value)}` nie jest ' + {
         'int': 'liczbą całkowitą',
