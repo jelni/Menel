@@ -9,11 +9,11 @@ from cliffs import (
     UnknownCommandError
 )
 
-from command_dispatcher import dispatch_errors
-from functions.clean_content import clean_content
-from functions.user_perms import user_perms
-from objects.cooldowns import cooldowns
-from objects.message import Message
+from ..command_dispatcher import dispatch_errors
+from ..functions.clean_content import clean_content
+from ..functions.user_perms import user_perms
+from ..objects.cooldowns import cooldowns
+from ..objects.message import Message
 
 
 async def dispatch(cliffs: CommandDispatcher, m: Message, prefix: str):

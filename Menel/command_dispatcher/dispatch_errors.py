@@ -2,8 +2,8 @@ from math import ceil
 
 from cliffs import MismatchedLiteralSuggestion, MismatchedParameterType
 
-from functions.clean_content import clean_content
-from functions.plural_time import plural_time
+from ..functions.clean_content import clean_content
+from ..functions.plural_time import plural_time
 
 
 def cooldown(time: float) -> str:

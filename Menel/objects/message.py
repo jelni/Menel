@@ -2,7 +2,7 @@ from typing import Optional
 
 import discord
 
-from objects.bot import bot
+from ..objects.bot import bot
 
 
 class Message(discord.Message):
