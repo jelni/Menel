@@ -18,7 +18,7 @@ CHARSETS = (
 
 
 def setup(cliffs):
-    @cliffs.command('(ascii|asciiart) [(blocks|standard|minimal):charset] [invert|inv|inverted]:invert',
+    @cliffs.command('(ascii|asciiart) {[(blocks|standard|minimal):charset] [invert|inv|inverted]:invert}',
         name='asciiart', cooldown=5)
     async def command(m: Message, charset=0, invert=None):
         if not m.attachments:
@@ -57,7 +57,7 @@ def setup(cliffs):
             (150, round(image.height * 75 / image.width)), Image.LANCZOS)
 
         if invert:
-            charset.reverse()
+            charset = reversed(charset)
 
         image = image.convert('L')
 
