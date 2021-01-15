@@ -1,6 +1,6 @@
 import discord
 
-from objects.message import Message
+from ..objects.message import Message
 
 
 def user_perms(m: Message) -> int:

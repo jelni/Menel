@@ -1,4 +1,4 @@
-from functions.plural_word import plural_word
+from ..functions.plural_word import plural_word
 
 
 def plural_time(number: int) -> str:

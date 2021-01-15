@@ -3,13 +3,13 @@ import re
 import discord
 from cliffs import CommandDispatcher
 
-import regexes
-from command_dispatcher.dispatch import dispatch
-from functions.constant_length_text import constant_length_text as clt
-from functions.cut_long_text import cut_long_text
-from objects.bot import Menel
-from objects.cooldowns import cooldowns
-from objects.message import Message
+from ..command_dispatcher.dispatch import dispatch
+from ..functions.constant_length_text import constant_length_text as clt
+from ..functions.cut_long_text import cut_long_text
+from ..objects.bot import Menel
+from ..objects.cooldowns import cooldowns
+from ..objects.message import Message
+from ..resources import regexes
 
 
 def setup(bot: Menel, cliffs: CommandDispatcher):
