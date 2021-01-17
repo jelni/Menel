@@ -42,7 +42,8 @@ def setup(cliffs):
             embed = discord.Embed(
                 title=cut_long_text(json['word'], 256),
                 url=json['permalink'],
-                description=cut_long_text(clean_content(remove_brackets(json['definition'])), 1024)
+                description=cut_long_text(clean_content(remove_brackets(json['definition'])), 1024),
+                colour=discord.Colour.blurple()
             )
 
             embed.add_field(
@@ -52,6 +53,6 @@ def setup(cliffs):
             )
 
             embed.set_footer(text=f'Author: {clean_content(json["author"])}\n'
-                                  f'👍 {json["thumbs_up"]} 👎 {json["thumbs_down"]}')
+                                  f'{json["thumbs_up"]} 👍 {json["thumbs_down"]} 👎')
 
             await m.send(embed=embed)

@@ -22,5 +22,5 @@ def setup(cliffs):
         await m.send(embed=Embed(
             title='Twoje obecne spowolnienia',
             description='\n'.join(cooldown_list),
-            colour=Colour.blue())
+            colour=Colour.blurple())
         )
